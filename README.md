@@ -633,3 +633,37 @@ router.post("/logout", authenticateToken, (req: Request, res: Response) => {
   ...
 });
 ```
+const { studentId, courseId } = req.body;
+        const parse = zEnrollmentBody.safeParse(studentId, courseId)
+
+        if (!parse.success) {
+            return res.status(400).json({
+                ok: false,
+                error: parse.error.issues[0].message
+            })
+        }
+
+        const stuExis = students.some((s) => s.studentId == parse.data.studentId);
+        const couExis = courses.some((c) => c.courseId == parse.data.courseId);
+
+        const isEnrolled = enrollments.some(
+            (e) => e.studentId === parse.data.studentId && e.courseId == parse.data.courseId
+        );
+
+        if (!stuExis && !couExis && !isEnrolled) {
+            enrollments.push({
+                studentId: parse.data.studentId,
+                courseId: parse.data.courseId,
+            });
+
+            return res.status(200).json({
+                ok: true,
+                message: "Enrollment successful",
+                data: enrollments,
+            });
+        } else {
+            return res.status(404).json({
+                ok: false,
+                message: "Invalids",
+            });
+        }
