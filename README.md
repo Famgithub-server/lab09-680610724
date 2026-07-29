@@ -1,3 +1,11 @@
+Lab 09 - SRESTful API (Part 3)
+ป้อนข้อมูลนักศึกษา
+รหัส นศ.: 680610724
+
+ชื่อ-สกุล : ศุภัชโชค พิมสาน
+
+Vercel URL : https://lab09-680610724.vercel.app/
+
 # Lecture 09 - RESTful API (Part 3)
 
 ### Content
